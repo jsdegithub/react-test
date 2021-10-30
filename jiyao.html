@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            // import "./styles.css";
+            // import { createElement, render } from "./utils";
+
+            const React = (function () {
+                let hooks = [];
+                let idx = 0;
+
+                function useState(initVal) {
+                    const state = hooks[idx] || initVal;
+                    const _idx = idx;
+                    const setState = (newVal) => {
+                        hooks[_idx] = newVal;
+                    };
+                    idx++;
+                    return [state, setState];
+                }
+                function render(Component) {
+                    idx = 0;
+                    const C = Component();
+                    C.render();
+                    return C;
+                }
+                function workLoop() {
+                    idx = 0;
+                    render(hooks)();
+                    setTimeout(workLoop, 300);
+                }
+                setTimeout(workLoop, 300);
+                function useEffect(cb, depArray) {
+                    const oldDeps = hooks[idx];
+                    let hasChanged = true;
+                    if (oldDeps) {
+                        hasChanged = depArray.some((dep, i) => !Object.is(dep, oldDeps[i]));
+                    }
+                    if (hasChanged) {
+                        cb();
+                    }
+                    hooks[idx] = depArray;
+                    idx++;
+                }
+                return { useState, render: render(hooks), useEffect, createElement };
+            })();
+
+            function useDogs(count) {
+                const [list, setList] = React.useState([]);
+                React.useEffect(() => {
+                    fetch("https://dogceo.netlify.com/.netlify/functions/pics?count=" + count)
+                        .then((x) => x.json())
+                        .then((x) => setList(x));
+                }, [count]);
+                return list;
+            }
+
+            function Component() {
+                const [count, setCount] = React.useState(1);
+                const [text, setText] = React.useState("apple");
+                React.useEffect(() => {
+                    console.log("react react react");
+                }, [count]);
+                const list = useDogs(count);
+                return (
+                    <main>
+                        <h1>
+                            This is <i>Not</i> React
+                        </h1>
+                        <button onClick={() => setCount(count + 1)}>click:{count}</button>
+                        {list.map((item) => {
+                            <img src={item} />;
+                        })}
+                    </main>
+                );
+                return {
+                    render: () => {
+                        console.log({ count, text });
+                    },
+                    click: () => {
+                        setCount(count + 1);
+                    },
+                    type: (word) => {
+                        setText(word);
+                    },
+                };
+            }
+
+            var App = React.render(Component);
+            App.click();
+            var App = React.render(Component);
+            App.type("pear");
+            var App = React.render(Component);
+            App.click();
+        </script>
+    </body>
+</html>

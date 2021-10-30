@@ -1,17 +1,18 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+// import ReactEvent from "./component/ReactEvent";
+// import Parent from "./component/useMemo和useCallback/Parent";
+// import Parent from "./component/生命周期和Rerender/Parent";
+// import { RefHook } from "./component/useRef";
+// import Counter from "./component/useReducer/useReducer";
+// import LoginForm from "./component/useReducer/LoginForm";
+// import LoginForm from "./component/useReducer/LoginForm-useReducer";
+import LoginForm from "./component/useReducer/LoginForm-useReducerAndContext";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <LoginForm />
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
