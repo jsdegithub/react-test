@@ -10,11 +10,11 @@ export const ProductDetail = () => {
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.productDetail.loading);
   const error = useSelector((state) => state.productDetail.error);
-  const product = useSelector((state) => state.productDetail.product);
+  const productDetail = useSelector((state) => state.productDetail.productDetail);
 
   console.log(loading);
   console.log(error);
-  console.log("product: ", product);
+  console.log("product: ", productDetail);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -53,7 +53,7 @@ export const ProductDetail = () => {
   return (
     <div>
       <h3>ProductDetail: {id}</h3>
-      <p>{product.description}</p>
+      <p>{productDetail.description}</p>
     </div>
   );
 };

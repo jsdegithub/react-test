@@ -1,7 +1,7 @@
 const defaultState = {
   loading: true,
   error: null,
-  product: null,
+  productDetail: null,
 };
 
 export const productDetailReducer = (state = defaultState, action) => {
@@ -9,7 +9,7 @@ export const productDetailReducer = (state = defaultState, action) => {
     case "getProductDetailStart":
       return { ...state, loading: true };
     case "getProductDetailSuccess":
-      return { ...state, loading: false, product: action.payload };
+      return { ...state, loading: false, productDetail: action.payload };
     case "getProductDetailFailed":
       return { ...state, loading: false, error: action.payload };
     default:
