@@ -2,6 +2,9 @@ import axios from "axios";
 import { createContext, useReducer, useRef } from "react";
 import LoginButton from "./LoginButton";
 
+// export不能写到组件里面
+export const LoginContext = createContext();
+
 const LoginForm = () => {
   const initialState = {
     loading: false,
@@ -49,8 +52,6 @@ const LoginForm = () => {
       dispatch({ type: "loginFailed", payload: { error: e.message } });
     }
   };
-
-  export const LoginContext = createContext(dispatch);
 
   const { loading, error, jwt } = state;
   if (loading) return <div>'登录请求中...'</div>;
