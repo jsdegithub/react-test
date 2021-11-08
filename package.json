@@ -6,6 +6,7 @@
     "@ant-design/icons": "^4.6.2",
     "@babel/core": "7.12.3",
     "@pmmmwh/react-refresh-webpack-plugin": "0.4.3",
+    "@reduxjs/toolkit": "^1.6.2",
     "@svgr/webpack": "5.5.0",
     "@testing-library/jest-dom": "^5.11.10",
     "@testing-library/react": "^11.2.6",

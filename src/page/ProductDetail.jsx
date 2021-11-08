@@ -3,6 +3,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
+import { productDetailSlice } from "../redux/reducer/productDetail/slice";
 
 export const ProductDetail = () => {
   const { id } = useParams();
@@ -17,23 +18,15 @@ export const ProductDetail = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      dispatch({
-        type: "getProductDetailStart",
-      });
+      dispatch(productDetailSlice.actions.getProductDetailStart());
       try {
         const { data } = await axios.get(
           `http://123.56.149.216:8080/api/touristRoutes/${id}`
         );
         console.log("response: ", data);
-        dispatch({
-          type: "getProductDetailSuccess",
-          payload: data,
-        });
+        dispatch(productDetailSlice.actions.getProductDetailSuccess(data));
       } catch (e) {
-        dispatch({
-          type: "getProductDetailFailed",
-          payload: e.message,
-        });
+        dispatch(productDetailSlice.actions.getProductDetailFailed(e.message));
       }
     };
 
