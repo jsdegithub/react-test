@@ -14,7 +14,7 @@ export const ProductDetail = () => {
 
   console.log(loading);
   console.log(error);
-  console.log("product: ", productDetail);
+  console.log("productDetail: ", productDetail);
 
   useEffect(() => {
     const fetchData = async () => {
